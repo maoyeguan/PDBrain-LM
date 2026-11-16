@@ -1,0 +1,14 @@
+# editor and OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# local scratch
+*.log
+node_modules/

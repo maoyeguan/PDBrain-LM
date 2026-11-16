@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDBrain-LM · whole-brain LSM–MRI dataset for a Parkinson's disease mouse model</title>
+  <meta name="description" content="PDBrain-LM pairs whole-brain light-sheet microscopy (autofluorescence, pS129, TH) with ex vivo 9.4 T MRI in 37 mouse brains from an α-synuclein preformed-fibril model of Parkinson's disease, registered in a common space, with three learning tasks.">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PDBrain-LM">
+  <meta property="og:description" content="A whole-brain light-sheet microscopy and MRI dataset, with multimodal learning benchmarks, for a mouse model of Parkinson's disease.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/ibm-plex-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap bar__in">
+    <a class="bar__mark" href="#top">PDBrain<span>-LM</span></a>
+    <nav class="bar__nav" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#acquisition">Acquisition</a>
+      <a href="#explore">Explore</a>
+      <a href="#tasks">Tasks</a>
+      <a href="#access">Access</a>
+      <a href="#cite">Cite</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ====================================================================
+       HERO
+       ==================================================================== -->
+  <section class="hero" id="top" aria-labelledby="h-top">
+    <div class="wrap hero__head">
+      <div>
+        <p class="label">Paired light-sheet microscopy and 9.4 T MRI · mouse model of Parkinson's disease</p>
+        <h1 id="h-top">PDBrain<span>-LM</span></h1>
+        <p class="lede">A whole-brain light-sheet microscopy and MRI dataset, with multimodal learning benchmarks, for a mouse model of Parkinson's disease.</p>
+      </div>
+
+      <div class="hero__meta">
+        <!-- AUTHORS: hidden during double-blind review. To show them, replace the two
+             lines below with
+               <p class="authors">Name<sup>1</sup>, Name<sup>2</sup>, …</p>
+               <ol class="affils">
+                 <li><sup>1</sup> Affiliation</li>
+                 …
+               </ol>
+             and update CONTACT, CITATION and the footer as well. -->
+        <p class="authors">Anonymous authors</p>
+        <p class="affils">Names and affiliations are withheld while the paper is under double-blind review, and will be listed here once the review process has concluded.</p>
+
+        <!-- LINKS: when a link is ready, replace the <span class="btn is-pending"> … </span>
+             with  <a class="btn" href="https://…">Paper</a>  (drop the <small>soon</small>). -->
+        <ul class="actions">
+          <li><span class="btn is-pending">Paper <small>soon</small></span></li>
+          <li><span class="btn is-pending">Dataset <small>soon</small></span></li>
+          <li><span class="btn is-pending">Evaluation protocols <small>soon</small></span></li>
+          <li>
+            <a class="btn" href="https://doi.org/10.64898/2025.12.05.692595" rel="noopener">Source study
+              <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1h7v7M9 1 1 9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <figure class="strip">
+      <div class="strip__media wrap">
+        <div class="anim" data-anim data-eager
+             data-gif="assets/img/rotation/pff-4panel.gif"
+             data-gif-narrow="assets/img/rotation/pff-merge.gif"
+             style="--ar-wide: 2388 / 457; --ar-narrow: 591 / 417;">
+          <picture>
+            <source media="(max-width: 720px)" srcset="assets/img/rotation/pff-merge-still.webp" width="591" height="417">
+            <img src="assets/img/rotation/pff-4panel-still.webp" width="2388" height="457" fetchpriority="high"
+                 alt="One mouse brain imaged by light-sheet microscopy, shown as whole-brain maximum-intensity projections: autofluorescence in grey, TH in green, pS129 in magenta, and the three channels merged.">
+          </picture>
+          <noscript>
+            <picture class="anim__live">
+              <source media="(max-width: 720px)" srcset="assets/img/rotation/pff-merge.gif">
+              <img src="assets/img/rotation/pff-4panel.gif" alt="">
+            </picture>
+          </noscript>
+        </div>
+      </div>
+      <figcaption class="wrap strip__cap">
+        <p class="cap">
+          One PFF-injected brain, 20 weeks after injection: whole-brain maximum-intensity projection, turning about the dorsoventral axis.
+          <span class="keys"><span class="key key--af">Autofluorescence</span><span class="key key--th">TH</span><span class="key key--ps">pS129</span></span>
+        </p>
+        <button class="ctl" type="button" data-motion>
+          <span class="ctl__icon" aria-hidden="true"></span><span data-motion-label>Pause rotation</span>
+        </button>
+      </figcaption>
+    </figure>
+
+    <div class="wrap">
+      <dl class="tiles">
+        <div class="tile"><dt class="label">Paired brains</dt><dd>37</dd></div>
+        <div class="tile"><dt class="label">PFF-injected / monomer controls</dt><dd>18 <i>/</i> 19</dd></div>
+        <div class="tile"><dt class="label">LSM channels</dt><dd>3</dd></div>
+        <div class="tile"><dt class="label">MRI contrasts</dt><dd>4</dd></div>
+        <div class="tile"><dt class="label">LSM sampling</dt><dd>2.75 × 2.75 × 4 <small>µm</small></dd></div>
+        <div class="tile"><dt class="label">Ex vivo MRI</dt><dd>9.4 <small>T</small></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       01 OVERVIEW
+       ==================================================================== -->
+  <section class="sec" id="overview" aria-labelledby="h-overview">
+    <div class="wrap sec__grid">
+      <header class="sec__head">
+        <p class="label sec__no">01</p>
+        <h2 id="h-overview">Overview</h2>
+        <p class="sec__sum">Two imaging scales, the same animals, one coordinate space.</p>
+      </header>
+
+      <div class="sec__body">
+        <p class="lead">
+          Parkinson's disease combines aggregation of α-synuclein with loss of dopaminergic neurons.
+          MRI describes tissue across the whole brain; light-sheet microscopy shows molecular signal
+          at micrometre sampling. PDBrain-LM provides both for every animal.
+        </p>
+        <p>
+          The dataset contains 37 mouse brains: 18 injected with α-synuclein preformed fibrils (PFF)
+          and 19 injected with α-synuclein monomer as controls. Each animal has ex vivo 9.4 T MRI and
+          whole-brain light-sheet microscopy (LSM) with a label-free autofluorescence channel and a
+          tyrosine hydroxylase (TH) channel that marks dopaminergic structures; 26 animals also have a
+          channel for α-synuclein phosphorylated at serine 129 (pS129), the marker of pathology.
+        </p>
+        <p>
+          MRI and LSM of each animal are registered with the PRISM pipeline into the DevCCF reference
+          space, where Allen CCFv3 labels are available. Three learning tasks are defined on the
+          paired data, each with a fixed evaluation protocol.
+        </p>
+
+        <ul class="pts">
+          <li>
+            <h3>Disease and control groups</h3>
+            <p>Public whole-brain LSM resources mostly serve anatomical and circuit mapping, activity mapping and cell detection. Here the cohort is a disease model with matched controls, at two time points.</p>
+          </li>
+          <li>
+            <h3>Paired across scales</h3>
+            <p>MRI and LSM come from the same brains and are registered subject by subject, so microscopic pathology can be related directly to MRI signal.</p>
+          </li>
+          <li>
+            <h3>Built for learning</h3>
+            <p>Atlas-defined regions, animal-level data splits and baseline results are given for classification, cross-channel synthesis and guided super-resolution.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       02 DATASET
+       ==================================================================== -->
+  <section class="sec" id="dataset" aria-labelledby="h-dataset">
+    <div class="wrap sec__grid">
+      <header class="sec__head">
+        <p class="label sec__no">02</p>
+        <h2 id="h-dataset">Dataset</h2>
+        <p class="sec__sum">Cohort, modalities and the grids the data are used on.</p>
+      </header>
+
+      <div class="sec__body">
+        <p>
+          All animals come from one multimodal study of α-synucleinopathy in C57BL/6J mice
+          (<a href="https://doi.org/10.64898/2025.12.05.692595" rel="noopener">Combes, Dong et al.</a>).
+          Each mouse received a unilateral injection of mouse α-synuclein PFFs, or of monomer, into the
+          substantia nigra pars compacta (SNc) and was examined 12 or 20 weeks post-injection (wpi).
+        </p>
+
+        <p class="cap tbl-cap" id="cap-cohort"><b>Cohort and data availability.</b> Number of animals with each type of data.</p>
+        <div class="tbl-wrap">
+          <table class="tbl tbl--cohort" aria-labelledby="cap-cohort">
+            <thead>
+              <tr>
+                <th scope="col">Group</th>
+                <th scope="col" class="num">Animals</th>
+                <th scope="col" class="num">MRI, 4 contrasts</th>
+                <th scope="col" class="num"><span class="key key--af">Autofluorescence</span></th>
+                <th scope="col" class="num"><span class="key key--ps">pS129</span></th>
+                <th scope="col" class="num"><span class="key key--th">TH</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">PFF-injected <small>α-synuclein preformed fibrils</small></th>
+                <td class="num">18</td><td class="num">18</td><td class="num">18</td><td class="num">18</td><td class="num">18</td>
+              </tr>
+              <tr>
+                <th scope="row">Monomer control <small>α-synuclein monomer</small></th>
+                <td class="num">19</td><td class="num">19</td><td class="num">19</td><td class="num">8</td><td class="num">19</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row">Total</th>
+                <td class="num">37</td><td class="num">37</td><td class="num">37</td><td class="num">26</td><td class="num">37</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <p class="cap">Both groups include animals examined at 12 and at 20 wpi. pS129 imaging is available for every PFF-injected animal and for 8 of the 19 controls.</p>
+
+        <h3>Modalities</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <caption class="vh">Modalities and contrasts in the dataset</caption>
+            <thead>
+              <tr>
+                <th scope="col">Contrast</th>
+                <th scope="col">What it shows</th>
+                <th scope="col">Acquired sampling</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="group"><th colspan="3" scope="colgroup">Light-sheet microscopy · cleared whole brain, mesoSPIM</th></tr>
+              <tr>
+                <th scope="row"><span class="key key--af">Autofluorescence</span> <small>488 nm</small></th>
+                <td>Tissue anatomy without a label</td>
+                <td class="nowrap">2.75 × 2.75 × 4 µm</td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="key key--ps">pS129</span> <small>561 nm</small></th>
+                <td>α-Synuclein phosphorylated at serine 129: α-synuclein pathology</td>
+                <td class="nowrap">2.75 × 2.75 × 4 µm</td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="key key--th">TH</span> <small>647 nm</small></th>
+                <td>Tyrosine hydroxylase: dopaminergic cell bodies and fibres</td>
+                <td class="nowrap">2.75 × 2.75 × 4 µm</td>
+              </tr>
+              <tr class="group"><th colspan="3" scope="colgroup">Magnetic resonance imaging · 9.4 T, ex vivo</th></tr>
+              <tr>
+                <th scope="row">T1-weighted</th>
+                <td>Anatomy; the MRI reference for registration</td>
+                <td class="nowrap">60 µm isotropic</td>
+              </tr>
+              <tr>
+                <th scope="row">DTI <small>FA, AD, RD, MD</small></th>
+                <td>Water diffusion and tissue microstructure</td>
+                <td class="nowrap">100 µm isotropic</td>
+              </tr>
+              <tr>
+                <th scope="row">SWI</th>
+                <td>Susceptibility-weighted contrast</td>
+                <td class="nowrap">60 µm isotropic</td>
+              </tr>
+              <tr>
+                <th scope="row">QSM</th>
+                <td>Quantitative magnetic susceptibility of tissue</td>
+                <td>reconstructed from the SWI acquisition</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cap">At this sampling one LSM channel of one brain holds on the order of tens of billions of voxels.</p>
+
+        <h3>Grids and coordinate spaces</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <caption class="vh">Sampling grids used in the dataset and in the tasks</caption>
+            <thead>
+              <tr>
+                <th scope="col">Grid</th>
+                <th scope="col">Voxel size</th>
+                <th scope="col">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Native LSM</th>
+                <td class="nowrap">2.75 × 2.75 × 4 µm</td>
+                <td>Original acquisitions</td>
+              </tr>
+              <tr>
+                <th scope="row">Block-averaged LSM</th>
+                <td class="nowrap">13.75 × 13.75 × 20 µm</td>
+                <td>5 × 5 × 5 average of the native grid, in each animal's own space; input grid for phenotype identification</td>
+              </tr>
+              <tr>
+                <th scope="row">DevCCF common space</th>
+                <td class="nowrap">20 µm isotropic</td>
+                <td>MRI and all LSM channels of every animal after PRISM registration; Allen CCFv3 labels</td>
+              </tr>
+              <tr>
+                <th scope="row">DevCCF-aligned LSM space</th>
+                <td class="nowrap">50 µm isotropic (MRI)</td>
+                <td>MRI resampled next to the LSM of the same animal; reference for super-resolution</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Anatomical annotation</h3>
+        <p>
+          The P56 DevCCF incorporates the Allen Mouse Brain Common Coordinate Framework (CCFv3), so
+          every registered volume can be divided into standard regions of interest: cortical and
+          subcortical regions, white-matter tracts and ventricles. The inverse transforms carry the
+          same labels back into each animal's own space.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       03 ACQUISITION
+       ==================================================================== -->
+  <section class="sec" id="acquisition" aria-labelledby="h-acquisition">
+    <div class="wrap sec__grid">
+      <header class="sec__head">
+        <p class="label sec__no">03</p>
+        <h2 id="h-acquisition">Acquisition</h2>
+        <p class="sec__sum">From injection to registered volumes. Animal work and imaging follow the source study.</p>
+      </header>
+
+      <div class="sec__body">
+        <ol class="steps">
+          <li>
+            <h4>Injection</h4>
+            <p>Mouse α-synuclein PFFs, or monomer as control, are injected into the SNc of one hemisphere.</p>
+          </li>
+          <li>
+            <h4>Incubation</h4>
+            <p>Animals are examined 12 or 20 weeks after injection.</p>
+          </li>
+          <li>
+            <h4>Ex vivo MRI</h4>
+            <p>Fixed heads are scanned at 9.4 T with the brain left in the skull: T1-weighted, DTI and SWI, with QSM reconstructed from the SWI data.</p>
+          </li>
+          <li>
+            <h4>Clearing and labelling</h4>
+            <p>Brains are taken out of the skull, labelled for pS129 and TH, and cleared with an optimised iDISCO+ protocol.</p>
+          </li>
+          <li>
+            <h4>Light-sheet imaging</h4>
+            <p>The whole cleared brain is imaged on a mesoSPIM in three channels at 2.75 × 2.75 × 4 µm.</p>
+          </li>
+          <li>
+            <h4>Registration</h4>
+            <p>PRISM maps the MRI and LSM volumes of each animal into DevCCF space on a common 20 µm grid.</p>
+          </li>
+        </ol>
+
+        <!-- FIGURE from the source study. To use a sharper copy, replace
+             assets/img/acquisition/source-study-fig1.png (keep the file name)
+             and update width/height below. -->
+        <figure class="plate">
+          <a class="plate__img" href="assets/img/acquisition/source-study-fig1.png" title="Open the figure at full size">
+            <img src="assets/img/acquisition/source-study-fig1.png" width="1259" height="767" loading="lazy"
+                 alt="Workflow figure from the source study. Panel a: unilateral injection into the substantia nigra, sacrifice at 12 or 20 weeks, and 9.4 T ex vivo MRI with T1-weighted, SWI, DTI and QSM images. Panel b: whole-brain labelling and iDISCO+ clearing, mesoSPIM imaging, three-channel acquisition and cross-modal registration. Panel c: atlas-based regions, background subtraction, LSM–MRI fusion and correlation networks.">
+          </a>
+          <figcaption class="cap">
+            Workflow of the source study: <strong>a</strong> injection and ex vivo multiparametric MRI,
+            <strong>b</strong> whole-brain labelling, clearing, light-sheet imaging and cross-modal registration,
+            <strong>c</strong> the analysis carried out in that study.
+            Reproduced unchanged from Combes, Dong et al., bioRxiv (version of 5 May 2026), Figure 1,
+            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener license">CC BY-NC-ND 4.0</a>.
+          </figcaption>
+        </figure>
+
+        <h3>MRI protocol</h3>
+        <p class="cap tbl-cap" id="cap-mri">Bruker BioSpec 94/30 with a cryogenic 2 × 2 phased-array surface coil. Values as reported in the source study.</p>
+        <div class="tbl-wrap">
+          <table class="tbl" aria-labelledby="cap-mri">
+            <thead>
+              <tr>
+                <th scope="col">Contrast</th>
+                <th scope="col">Sequence</th>
+                <th scope="col">Voxel size</th>
+                <th scope="col">Parameters</th>
+                <th scope="col" class="num">Scan time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">T1-weighted</th>
+                <td>3D FLASH gradient echo</td>
+                <td class="nowrap">60 µm isotropic</td>
+                <td>TE 35 ms, TR 97 ms</td>
+                <td class="num">about 1.5 h</td>
+              </tr>
+              <tr>
+                <th scope="row">DTI</th>
+                <td>3D multi-shot EPI, 4 shots</td>
+                <td class="nowrap">100 µm isotropic</td>
+                <td>TE 28 ms, TR 1500 ms, b = 4000 s/mm², 60 directions</td>
+                <td class="num">about 8.5 h</td>
+              </tr>
+              <tr>
+                <th scope="row">SWI and QSM</th>
+                <td>3D FLASH gradient echo</td>
+                <td class="nowrap">60 µm isotropic</td>
+                <td>TE 12 ms, TR 250 ms, 4 averages</td>
+                <td class="num">about 7 h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Light-sheet protocol</h3>
+        <dl class="spec">
+          <dt>Microscope</dt>
+          <dd>mesoSPIM, with a Mitutoyo M Plan Apo 2×/0.055 objective</dd>
+          <dt>Sampling</dt>
+          <dd>2.75 × 2.75 µm in plane, 4 µm steps in depth; horizontal imaging plane</dd>
+          <dt>Channels</dt>
+          <dd>488 nm autofluorescence; 561 nm pS129 (Alexa 555 conjugate); 647 nm TH (VioR667 conjugate)</dd>
+          <dt>Coverage</dt>
+          <dd>Four tiles per brain, stitched and fused; about 7.1 × 12.7 × 6.4 mm after cropping</dd>
+          <dt>Acquisition time</dt>
+          <dd>About 1 h per brain, 20 min per channel</dd>
+          <dt>Labelling</dt>
+          <dd>Directly conjugated antibodies, incubated for 4 weeks at 37 °C</dd>
+        </dl>
+
+        <h3>Registration with PRISM</h3>
+        <p>
+          PRISM (Pipeline for Registration and Integration of Structural and Molecular Imaging) runs two
+          coarse-to-fine workflows in parallel. The T1-weighted volume is bias-corrected and registered
+          to the DevCCF MRI template with rigid, affine and symmetric-normalisation (SyN) stages inside
+          a brain mask. The autofluorescence volume is downsampled, registered to the DevCCF LSM
+          template, and then refined against the template-aligned T1-weighted MRI with a cross-modal SyN
+          step. The resulting transforms are applied to the pS129 and TH channels.
+        </p>
+        <p>
+          Accuracy was checked on seven anatomical landmarks, in ventricles and major white-matter
+          tracts, across three iDISCO+-processed brains: the mean MRI–LSM landmark error is
+          <strong>41.9 ± 22.4 µm</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       04 EXPLORE
+       ==================================================================== -->
+  <section class="sec sec--stack" id="explore" aria-labelledby="h-explore">
+    <div class="wrap sec__grid">
+      <header class="sec__head">
+        <p class="label sec__no">04</p>
+        <h2 id="h-explore">Explore</h2>
+        <p class="sec__sum">One brain from each group, at 20 wpi, with identical display ranges.</p>
+      </header>
+
+      <div class="sec__body">
+        <p>
+          The images below are light-sheet data from two animals of the dataset: a PFF-injected brain
+          and a monomer-injected control. Both are drawn with the same lookup tables and intensity
+          ranges, so differences between them are differences in signal.
+          <span class="key key--af">Autofluorescence</span> is grey,
+          <span class="key key--ps">pS129</span> magenta and
+          <span class="key key--th">TH</span> green.
+        </p>
+      </div>
+
+      <!-- Rotation, both groups ------------------------------------------------ -->
+      <div class="sec__wide blk">
+        <div class="blk__head">
+          <h3>Whole brain, in rotation</h3>
+          <button class="ctl" type="button" data-motion>
+            <span class="ctl__icon" aria-hidden="true"></span><span data-motion-label>Pause rotation</span>
+          </button>
+        </div>
+
+        <div class="duo">
+          <figure class="duo__row">
+            <figcaption class="label">PFF-injected · CR2343</figcaption>
+            <div class="anim" data-anim data-sync="duo"
+                 data-gif="assets/img/rotation/pff-4panel.gif"
+                 data-gif-narrow="assets/img/rotation/pff-merge.gif"
+                 style="--ar-wide: 2388 / 457; --ar-narrow: 591 / 417;">
+              <picture>
+                <source media="(max-width: 720px)" srcset="assets/img/rotation/pff-merge-still.webp" width="591" height="417">
+                <img src="assets/img/rotation/pff-4panel-still.webp" width="2388" height="457" loading="lazy"
+                     alt="PFF-injected brain, whole-brain projections of autofluorescence, TH, pS129 and their merge. pS129 signal is dense in the striatum and midbrain.">
+              </picture>
+            </div>
+          </figure>
+          <figure class="duo__row">
+            <figcaption class="label">Monomer control · CR2337</figcaption>
+            <div class="anim" data-anim data-sync="duo"
+                 data-gif="assets/img/rotation/monomer-4panel.gif"
+                 data-gif-narrow="assets/img/rotation/monomer-merge.gif"
+                 style="--ar-wide: 2308 / 454; --ar-narrow: 571 / 414; --rel: .9665;">
+              <picture>
+                <source media="(max-width: 720px)" srcset="assets/img/rotation/monomer-merge-still.webp" width="571" height="414">
+                <img src="assets/img/rotation/monomer-4panel-still.webp" width="2308" height="454" loading="lazy"
+                     alt="Monomer-injected control brain, whole-brain projections of autofluorescence, TH, pS129 and their merge. The pS129 panel is almost empty.">
+              </picture>
+            </div>
+          </figure>
+        </div>
+        <p class="cap xp__cap">
+          Maximum-intensity projection of the whole volume, one turn about the dorsoventral axis.
+          The two brains are drawn at the same scale; bars are 1 mm.
+        </p>
+      </div>
+
+      <!-- Section explorer ------------------------------------------------------ -->
+      <div class="sec__wide blk xp" data-explorer>
+        <div class="blk__head">
+          <h3>Sections</h3>
+          <p>200 µm-thick maximum-intensity projections, 11 µm per pixel</p>
+        </div>
+
+        <form class="xp__controls" aria-label="Choose a section">
+          <fieldset class="seg">
+            <legend class="label">Plane</legend>
+            <div class="seg__opts">
+              <label><input type="radio" name="plane" value="coronal" checked><span>Coronal</span></label>
+              <label><input type="radio" name="plane" value="sagittal"><span>Sagittal</span></label>
+              <label><input type="radio" name="plane" value="horizontal"><span>Horizontal</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="seg">
+            <legend class="label" data-xp-axis>Distance from the anterior pole</legend>
+            <div class="seg__opts">
+              <label><input type="radio" name="level" value="1" checked><span data-xp-level>5.7 mm</span></label>
+              <label><input type="radio" name="level" value="2"><span data-xp-level>7.7 mm</span></label>
+              <label><input type="radio" name="level" value="3"><span data-xp-level>9.8 mm</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="seg">
+            <legend class="label">Channel</legend>
+            <div class="seg__opts">
+              <label><input type="radio" name="channel" value="af"><span class="key key--af">Autofluorescence</span></label>
+              <label><input type="radio" name="channel" value="ps129" checked><span class="key key--ps">pS129</span></label>
+              <label><input type="radio" name="channel" value="th"><span class="key key--th">TH</span></label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="xp__stage">
+          <figure class="xp__pane" data-xp-pane="pff">
+            <figcaption class="label"><b>PFF-injected</b><span>CR2343 · 20 wpi</span></figcaption>
+            <div class="xp__img">
+              <img src="assets/img/sections/pff/coronal-1-ps129.webp" width="898" height="582" loading="lazy"
+                   alt="pS129 channel, coronal section 5.7 mm from the anterior pole, PFF-injected brain.">
+            </div>
+          </figure>
+          <figure class="xp__pane" data-xp-pane="monomer">
+            <figcaption class="label"><b>Monomer control</b><span>CR2337 · 20 wpi</span></figcaption>
+            <div class="xp__img">
+              <img src="assets/img/sections/monomer/coronal-1-ps129.webp" width="914" height="593" loading="lazy"
+                   alt="pS129 channel, coronal section 5.7 mm from the anterior pole, monomer control brain.">
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <div class="sec__body">
+        <h3>Reading these images</h3>
+        <ul class="notes">
+          <li>The control brain has no pS129 inclusions. The few bright specks in its pS129 channel lie mostly at the brain surface and are not specific.</li>
+          <li>Sample-holder material along one cortical edge and embedding medium at the end of the brainstem are visible in autofluorescence. They also give a faint, diffuse surface signal in the pS129 channel of both brains.</li>
+          <li>Stripes from light-sheet shadowing are left as acquired.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       05 TASKS
+       RESULTS: the two tables below (region-wise AUC, synthesis baselines)
+       hold numbers from the paper draft. Edit them here when the numbers
+       change, or delete a <div class="tbl-wrap"> … </div> block to hide one.
+       ==================================================================== -->
+  <section class="sec" id="tasks" aria-labelledby="h-tasks">
+    <div class="wrap sec__grid">
+      <header class="sec__head">
+        <p class="label sec__no">05</p>
+        <h2 id="h-tasks">Tasks</h2>
+        <p class="sec__sum">Three learning problems on the paired data.</p>
+      </header>
+
+      <div class="sec__body">
+
+        <!-- Task 1 --------------------------------------------------------------- -->
+        <article class="task" id="task-1">
+          <div class="task__top">
+            <p class="label">Task 1 · Classification</p>
+            <span class="chip">Baseline reported</span>
+          </div>
+          <h3>Pathological phenotype identification</h3>
+          <p>
+            PFF injection produces pathology that depends on brain region and on time. The task asks
+            whether one LSM channel from one animal is enough to tell PFF from monomer injection, and
+            which regions carry the evidence. One classifier is trained for every pair of channel and region.
+          </p>
+
+          <dl class="spec">
+            <dt>Input</dt>
+            <dd>One LSM channel, pS129 or TH, cropped to one atlas-defined region with a two-voxel margin</dd>
+            <dt>Target</dt>
+            <dd>Injection condition: PFF or monomer</dd>
+            <dt>Regions</dt>
+            <dd>SNc, VTA, CP, BST, CEA and PPN, each split into the injected (ipsilateral) and the opposite (contralateral) hemisphere: 12 regions</dd>
+            <dt>Grid</dt>
+            <dd>13.75 × 13.75 × 20 µm, with Allen CCFv3 labels mapped into each animal's own space</dd>
+            <dt>Animals</dt>
+            <dd>TH: 37 (18 PFF, 19 monomer). pS129: 26 (18 PFF, 8 monomer)</dd>
+            <dt>Protocol</dt>
+            <dd>Five-fold cross-validation at animal level, stratified by group and time point, repeated with three fold partitions</dd>
+            <dt>Metric</dt>
+            <dd>AUC from the pooled out-of-fold predictions</dd>
+            <dt>Baseline</dt>
+            <dd>3D ResNet-18, trained from scratch for 60 epochs</dd>
+          </dl>
+
+          <p class="cap tbl-cap" id="cap-auc"><b>Baseline: region-wise AUC.</b> Mean ± SD over three repetitions of the cross-validation.</p>
+          <div class="tbl-wrap">
+            <table class="tbl tbl--auc" data-auc aria-labelledby="cap-auc">
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2">Region</th>
+                  <th scope="colgroup" colspan="2"><span class="key key--ps">pS129</span> · 26 animals</th>
+                  <th scope="colgroup" colspan="2"><span class="key key--th">TH</span> · 37 animals</th>
+                </tr>
+                <tr>
+                  <th scope="col">Ipsilateral</th>
+                  <th scope="col">Contralateral</th>
+                  <th scope="col">Ipsilateral</th>
+                  <th scope="col">Contralateral</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><abbr title="Substantia nigra pars compacta">SNc</abbr></th>
+                  <td><span class="auc" style="--v:1.00"><b>1.00</b> <i>± 0.00</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.24"><b>0.24</b> <i>± 0.03</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.82"><b>0.82</b> <i>± 0.06</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.47"><b>0.47</b> <i>± 0.01</i><span class="auc__bar"></span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><abbr title="Ventral tegmental area">VTA</abbr></th>
+                  <td><span class="auc" style="--v:0.94"><b>0.94</b> <i>± 0.02</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.57"><b>0.57</b> <i>± 0.14</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.79"><b>0.79</b> <i>± 0.01</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.45"><b>0.45</b> <i>± 0.04</i><span class="auc__bar"></span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><abbr title="Caudoputamen">CP</abbr></th>
+                  <td><span class="auc" style="--v:0.94"><b>0.94</b> <i>± 0.03</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.59"><b>0.59</b> <i>± 0.10</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.69"><b>0.69</b> <i>± 0.08</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.65"><b>0.65</b> <i>± 0.06</i><span class="auc__bar"></span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><abbr title="Bed nuclei of the stria terminalis">BST</abbr></th>
+                  <td><span class="auc" style="--v:1.00"><b>1.00</b> <i>± 0.00</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.97"><b>0.97</b> <i>± 0.03</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.62"><b>0.62</b> <i>± 0.09</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.58"><b>0.58</b> <i>± 0.06</i><span class="auc__bar"></span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><abbr title="Central amygdalar nucleus">CEA</abbr></th>
+                  <td><span class="auc" style="--v:0.97"><b>0.97</b> <i>± 0.00</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.87"><b>0.87</b> <i>± 0.03</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.62"><b>0.62</b> <i>± 0.01</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.41"><b>0.41</b> <i>± 0.11</i><span class="auc__bar"></span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row"><abbr title="Pedunculopontine nucleus">PPN</abbr></th>
+                  <td><span class="auc" style="--v:1.00"><b>1.00</b> <i>± 0.00</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:1.00"><b>1.00</b> <i>± 0.00</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.62"><b>0.62</b> <i>± 0.05</i><span class="auc__bar"></span></span></td>
+                  <td><span class="auc" style="--v:0.50"><b>0.50</b> <i>± 0.06</i><span class="auc__bar"></span></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="legend" aria-hidden="true">
+            <span><i class="l-fill"></i>AUC, on a scale from 0 to 1</span>
+            <span><i class="l-tick"></i>chance, 0.5</span>
+          </p>
+          <p class="cap">
+            pS129 separates the groups in every ipsilateral region and in the contralateral BST, CEA and PPN.
+            TH is informative mainly in the ipsilateral SNc and VTA, where dopaminergic cell bodies concentrate.
+            SNc substantia nigra pars compacta, VTA ventral tegmental area, CP caudoputamen,
+            BST bed nuclei of the stria terminalis, CEA central amygdalar nucleus, PPN pedunculopontine nucleus.
+          </p>
+        </article>
+
+        <!-- Task 2 --------------------------------------------------------------- -->
+        <article class="task" id="task-2">
+          <div class="task__top">
+            <p class="label">Task 2 · Cross-channel synthesis</p>
+            <span class="chip">Baselines reported</span>
+          </div>
+          <h3>TH synthesis from α-synuclein pathology</h3>
+          <p>
+            Whole-brain immunolabelling is limited by the number of fluorescence channels. Predicting TH
+            from channels that are already acquired would free one for another marker, and would allow
+            dopaminergic integrity to be assessed in animals without TH imaging.
+          </p>
+          <p>
+            pS129 alone does not determine a TH image, so each animal is also given a prior: the mean TH
+            image of the monomer controls, mapped into its own space. A model predicts the departure
+            from that prior.
+          </p>
+          <div class="eq">
+            <math displaystyle="true" aria-label="T-hat of animal i equals B i plus R theta of P i and B i">
+              <msub><mover><mi>T</mi><mo>^</mo></mover><mi>i</mi></msub>
+              <mo>=</mo>
+              <msub><mi>B</mi><mi>i</mi></msub>
+              <mo>+</mo>
+              <msub><mi>R</mi><mi>θ</mi></msub>
+              <mo stretchy="false">(</mo><msub><mi>P</mi><mi>i</mi></msub><mo>,</mo><msub><mi>B</mi><mi>i</mi></msub><mo stretchy="false">)</mo>
+            </math>
+          </div>
+
+          <dl class="spec">
+            <dt>Pathology map <i>P</i></dt>
+            <dd>pS129 aggregates only: voxels above a robust z-score threshold once autofluorescence and the estimated TH bleed-through are removed. The threshold is set on monomer animals</dd>
+            <dt>Prior <i>B</i></dt>
+            <dd>Voxel-wise mean of the intensity-normalised TH images of the 19 monomer animals in DevCCF space, mapped back into the animal's own space</dd>
+            <dt>Output</dt>
+            <dd>The TH volume of that animal, on its own grid</dd>
+            <dt>Animals</dt>
+            <dd>26 with both pS129 and TH (18 PFF, 8 monomer). The other 11 monomer animals contribute to the prior only</dd>
+            <dt>Image fidelity</dt>
+            <dd>PSNR and 3D SSIM inside the brain mask, averaged over the 18 PFF animals</dd>
+            <dt>Downstream use</dt>
+            <dd>Change in accuracy and AUC when the Task 1 classifier for the ipsilateral SNc, trained on real TH, is given the synthesised TH instead</dd>
+            <dt>Baselines</dt>
+            <dd>11 models from four families, each fed <i>P</i> and <i>B</i>, predicting the residual, with no external pretrained weights</dd>
+          </dl>
+
+          <p class="cap tbl-cap" id="cap-synthesis"><b>Baseline results.</b> ΔAcc and ΔAUC are changes relative to real TH input (accuracy 0.731, AUC 0.825). The best value in each column is set in bold.</p>
+          <div class="tbl-wrap">
+            <table class="tbl tbl--methods" aria-labelledby="cap-synthesis">
+              <thead>
+                <tr>
+                  <th scope="col">Method</th>
+                  <th scope="col">Operates in</th>
+                  <th scope="col" class="num">PSNR, dB</th>
+                  <th scope="col" class="num">SSIM</th>
+                  <th scope="col" class="num">ΔAcc</th>
+                  <th scope="col" class="num">ΔAUC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group"><th colspan="6" scope="colgroup">Regression networks</th></tr>
+                <tr><th scope="row">3D U-Net</th><td class="dim">3D</td><td class="num">25.31</td><td class="num">0.747</td><td class="num">−0.051</td><td class="num">−0.020</td></tr>
+                <tr><th scope="row">MedNeXt</th><td class="dim">3D</td><td class="num">25.75</td><td class="num">0.761</td><td class="num best">+0.077</td><td class="num">+0.008</td></tr>
+                <tr><th scope="row">UNeXt2</th><td class="dim">2.5D</td><td class="num">26.33</td><td class="num">0.772</td><td class="num">0.000</td><td class="num">−0.035</td></tr>
+                <tr><th scope="row">Restormer</th><td class="dim">2D</td><td class="num best">26.71</td><td class="num best">0.786</td><td class="num">+0.038</td><td class="num best">+0.052</td></tr>
+                <tr class="group"><th colspan="6" scope="colgroup">Conditional GANs</th></tr>
+                <tr><th scope="row">3D pix2pix</th><td class="dim">3D</td><td class="num">24.24</td><td class="num">0.712</td><td class="num">−0.077</td><td class="num">−0.146</td></tr>
+                <tr><th scope="row">Hi-Net</th><td class="dim">2D</td><td class="num">25.54</td><td class="num">0.735</td><td class="num">+0.064</td><td class="num">+0.038</td></tr>
+                <tr><th scope="row">RegGAN</th><td class="dim">2D</td><td class="num">25.22</td><td class="num">0.745</td><td class="num">+0.026</td><td class="num">+0.003</td></tr>
+                <tr><th scope="row">ResViT</th><td class="dim">2D</td><td class="num">25.29</td><td class="num">0.721</td><td class="num">0.000</td><td class="num">−0.029</td></tr>
+                <tr class="group"><th colspan="6" scope="colgroup">Diffusion models</th></tr>
+                <tr><th scope="row">YODA <small>DDIM sampling</small></th><td class="dim">2.5D</td><td class="num">25.60</td><td class="num">0.735</td><td class="num">+0.026</td><td class="num">−0.066</td></tr>
+                <tr><th scope="row">YODA <small>regression sampling</small></th><td class="dim">2.5D</td><td class="num">26.27</td><td class="num">0.774</td><td class="num best">+0.077</td><td class="num">−0.044</td></tr>
+                <tr class="group"><th colspan="6" scope="colgroup">Flow matching and diffusion bridges</th></tr>
+                <tr><th scope="row">WFM-P</th><td class="dim">3D</td><td class="num">25.26</td><td class="num">0.766</td><td class="num">+0.026</td><td class="num">+0.038</td></tr>
+                <tr><th scope="row">CT2MRI</th><td class="dim">2.5D</td><td class="num">24.01</td><td class="num">0.721</td><td class="num">+0.038</td><td class="num">−0.056</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cap">
+            Fidelity stays limited for every model, with PSNR between 24.01 and 26.71 dB and SSIM
+            between 0.712 and 0.786. 2D and 2.5D models are applied slice by slice.
+          </p>
+        </article>
+
+        <!-- Task 3 --------------------------------------------------------------- -->
+        <article class="task" id="task-3">
+          <div class="task__top">
+            <p class="label">Task 3 · Guided super-resolution</p>
+            <span class="chip">Protocol in preparation</span>
+          </div>
+          <h3>LSM-guided MRI super-resolution</h3>
+          <p>
+            High-field MRI of a mouse brain at fine resolution takes many hours of scanning. The
+            autofluorescence channel shows tissue structure at micrometre sampling without any label,
+            and it is registered to the MRI of the same animal. The task is to use it as an anatomical
+            guide for recovering fine detail from low-resolution MRI.
+          </p>
+
+          <dl class="spec">
+            <dt>Input</dt>
+            <dd>Low-resolution MRI and the registered LSM autofluorescence volume of the same animal</dd>
+            <dt>Target</dt>
+            <dd>The MRI volume at full resolution</dd>
+            <dt>Reference grid</dt>
+            <dd>MRI resampled to 50 µm isotropic in DevCCF-aligned LSM space</dd>
+            <dt>What makes it hard</dt>
+            <dd>Autofluorescence and MRI measure different tissue properties; clearing deforms tissue non-linearly; registration leaves a residual error</dd>
+            <dt>Status</dt>
+            <dd>The evaluation protocol and baseline results will be published with the paper</dd>
+          </dl>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       06 ACCESS
+       ==================================================================== -->
+  <section class="sec" id="access" aria-labelledby="h-access">
+    <div class="wrap sec__grid">
+      <header class="sec__head">
+        <p class="label sec__no">06</p>
+        <h2 id="h-access">Access</h2>
+        <p class="sec__sum">Release status and terms.</p>
+      </header>
+
+      <div class="sec__body">
+        <p class="lead">
+          The dataset, the anatomical annotations and the evaluation protocols for each task will be
+          made publicly available. Links will be added here on release.
+        </p>
+
+        <!-- RELEASE: when a component is published, put its link in the last column,
+             e.g.  <td><a href="https://www.ebi.ac.uk/biostudies/studies/S-XXXX">S-XXXX</a></td> -->
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <caption class="vh">Release components and their status</caption>
+            <thead>
+              <tr>
+                <th scope="col">Component</th>
+                <th scope="col">Contents</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Image data</th>
+                <td>LSM and MRI volumes of the 37 animals</td>
+                <td><span class="chip">In preparation</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Anatomical annotations</th>
+                <td>Allen CCFv3 labels in DevCCF space</td>
+                <td><span class="chip">In preparation</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Evaluation protocols</th>
+                <td>Data splits and metrics for the three tasks</td>
+                <td><span class="chip">In preparation</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Ethics</h3>
+        <p>
+          As stated in the source study, all animal experiments were approved by the
+          Regierungspräsidium Giessen, Germany (V54-19c2015h01GI 20/28 Nr. G32/2022), and are reported
+          following the ARRIVE 2.0 guidelines.
+        </p>
+
+        <h3>Terms of use</h3>
+        <p>The licence and terms of use will be stated with the release.</p>
+
+        <h3>Contact</h3>
+        <!-- CONTACT: add an e-mail address here if you want one on the page. -->
+        <p>Contact details will be given here once the double-blind review has concluded.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       07 CITE
+       ==================================================================== -->
+  <section class="sec" id="cite" aria-labelledby="h-cite">
+    <div class="wrap sec__grid">
+      <header class="sec__head">
+        <p class="label sec__no">07</p>
+        <h2 id="h-cite">Cite</h2>
+        <p class="sec__sum">If you use the data, please cite the dataset and the study it comes from.</p>
+      </header>
+
+      <div class="sec__body">
+        <h3>Dataset and benchmarks</h3>
+        <!-- CITATION: update this entry when the paper is published. -->
+        <div class="bib">
+          <div class="bib__bar"><span class="label">BibTeX</span><button class="btn btn--sm" type="button" data-copy="bib-dataset" aria-live="polite">Copy</button></div>
+<pre id="bib-dataset">@misc{pdbrainlm2026,
+  title  = {{PDBrain-LM}: A Whole-Brain {LSM}-{MRI} Dataset and Multimodal
+            Learning Benchmarks for {P}arkinson's Disease Model},
+  author = {Anonymous},
+  year   = {2026},
+  note   = {Under double-blind review}
+}</pre>
+        </div>
+
+        <h3>Source study: animals, imaging and PRISM registration</h3>
+        <div class="bib">
+          <div class="bib__bar"><span class="label">BibTeX</span><button class="btn btn--sm" type="button" data-copy="bib-source" aria-live="polite">Copy</button></div>
+<pre id="bib-source">@article{combes2025multiscale,
+  title   = {Multiscale brain-wide mapping of $\alpha$-synuclein-driven
+             dopaminergic degeneration and white matter impairment in
+             $\alpha$-synucleinopathy mice},
+  author  = {Combes, Benjamin F. and Dong, Sihan and Henrich, Martin T.
+             and others},
+  journal = {bioRxiv},
+  year    = {2025},
+  doi     = {10.64898/2025.12.05.692595}
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <p>PDBrain-LM</p>
+    <p>Images on this page are from the PDBrain-LM dataset unless credited otherwise. Set in IBM Plex.</p>
+  </div>
+</footer>
+
+<script src="assets/js/media-manifest.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
